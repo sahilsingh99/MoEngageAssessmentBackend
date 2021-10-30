@@ -41,7 +41,7 @@ exports.searchAnime = (req, res, next) => {
     .then(response => {
 
         response = response.data;
-        if(response.status_code != 200) {
+        if(response.status_code != 200 || response.data == undefined) {
 
             return res.status(500).json({
 
