@@ -10,10 +10,17 @@ detailed page : for every anime, there is an detailed page which contains variou
 
 ## Tech Used : 
 ```
-NodeJs,
+Node Js,
 MongoDB,
 Anilist API,
 Bcrypt Hashing,
 JWT Sessions,
 Express Framework.
+
+Front End :
+React Js,
+Material UI,
+CSS,
+Moment,
+React-Router
 ```
