@@ -12,7 +12,6 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
-app.use(morgan('dev'));
 app.use(cookieParser());
 
 const URI = process.env.DBURI;
