@@ -96,61 +96,6 @@ exports.searchAnime = (req, res, next) => {
     })
 }
 
-
-exports.addReview = (req, res, next) => {
-
-    const rating = req.body.rating;
-    const comment = req.body.comment;
-    const author_id = req.auth._id;
-    const anilist_id = req.anime_data.anilist_id;
-    // console.log(anilist_id);
-
-    let review = new Review( {
-
-        anilist_id : anilist_id,
-        rating : rating,
-        comment : comment,
-        author : author_id
-    });
-
-    review.save()
-    .then(data => {
-
-        User.findOneAndUpdate(
-            {_id : req.auth._id},
-            {$push : {reviews : data._id}}
-        ).exec()
-        .then(user_data => {
-
-            return res.status(201).json({
-
-                status : 201,
-                message : "review added successfully",
-                review : data
-            });
-        })
-        .catch(user_error => {
-
-            status : 500,
-            console.log(user_error);
-            return res.status(500).json({
-
-                message : "error in saving review id in user",
-            });
-        });
-        
-    })
-    .catch(error => {
-
-        console.log(error);
-        return res.status(500).json({
-
-            status : 500,
-            message : "error in saving review"
-        });
-    });
-}
-
 exports.getAnimeById = (req, res, next, id) => {
 
     let url = "https://api.aniapi.com/v1/anime";
@@ -229,6 +174,59 @@ exports.getAnimeById = (req, res, next, id) => {
             message : "Error in fetching data from API",
         })
     })
+}
+
+exports.addReview = (req, res, next) => {
+
+    const rating = req.body.rating;
+    const comment = req.body.comment;
+    const author_id = req.auth._id;
+    const anilist_id = req.anime_data.anilist_id;
+    // console.log(anilist_id);
+
+    let review = new Review( {
+
+        anilist_id : anilist_id,
+        rating : rating,
+        comment : comment,
+        author : author_id
+    });
+
+    review.save()
+    .then(data => {
+
+        User.findOneAndUpdate(
+            {_id : req.auth._id},
+            {$push : {reviews : data._id}}
+        ).exec()
+        .then(user_data => {
+
+            return res.status(201).json({
+
+                status : 201,
+                message : "review added successfully",
+                review : data
+            });
+        })
+        .catch(user_error => {
+
+            console.log(user_error);
+            return res.status(500).json({
+
+                message : "error in saving review id in user",
+            });
+        });
+        
+    })
+    .catch(error => {
+
+        console.log(error);
+        return res.status(500).json({
+
+            status : 500,
+            message : "error in saving review"
+        });
+    });
 }
 
 exports.getReview = (req, res, next) => {
