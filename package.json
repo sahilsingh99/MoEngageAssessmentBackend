@@ -2,14 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend for MoEngage Assessment",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
-  },
-  "engines": {
-    "npm": "7.19.x",
-    "node": "12.18.x"
   },
   "author": "Sahil Kundu",
   "license": "ISC",

@@ -32,12 +32,7 @@ exports.searchAnime = (req, res, next) => {
     else if(genre != "") url = url + "?genres=" + genre;
     console.log(url);
 
-    axios.get(url, {
-        headers : {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    })
+    axios.get(url)
     .then(response => {
 
         response = response.data;
@@ -101,12 +96,7 @@ exports.getAnimeById = (req, res, next, id) => {
     let url = "https://api.aniapi.com/v1/anime";
     url = url + "?anilist_id=" + id;
 
-    axios.get(url, {
-        headers : {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    })
+    axios.get(url)
     .then(response => {
 
         response = response.data;
@@ -182,7 +172,6 @@ exports.addReview = (req, res, next) => {
     const comment = req.body.comment;
     const author_id = req.auth._id;
     const anilist_id = req.anime_data.anilist_id;
-    // console.log(anilist_id);
 
     let review = new Review( {
 
